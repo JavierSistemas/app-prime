@@ -1,0 +1,14 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.com.jrsistemas</groupId>
+  <artifactId>app-prime</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <modules>
+  	<module>app-prime-entities</module>
+  	<module>app-prime-data</module>
+  	<module>app-prime-services</module>
+  	<module>app-prime-web</module>
+  </modules>
+</project>
