@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+              xmlns:context="http://www.springframework.org/schema/context"
+              xmlns:tx="http://www.springframework.org/schema/tx"
+              xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+              xsi:schemaLocation="http://www.springframework.org/schema/beans
+                                  http://www.springframework.org/schema/beans/spring-beans.xsd
+                                  http://www.springframework.org/schema/context
+                                  http://www.springframework.org/schema/context/spring-context.xsd
+                                  http://www.springframework.org/schema/tx
+                                  http://www.springframework.org/schema/tx/spring-tx.xsd
+                                  http://www.springframework.org/schema/data/jpa
+                                  http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
+
+    <!-- Permite el uso de anotaciones con Spring en el base-package mencionado -->
+    <context:annotation-config></context:annotation-config>
+    <context:component-scan base-package="com.jr.sistemas"></context:component-scan>
+
+    <!-- Carga el archivo de configuración de propiedades-->
+    <context:property-placeholder location="classpath*:config/application-properties.properties" />
+
+    <!-- Bean que se encarga de realizar la conexión a la base de datos -->
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${spring.datasource.driveClassName}"></property>
+        <property name="url" value="${spring.datasource.url}" ></property>
+        <property name="username" value="${spring.datasource.username}"></property>
+        <property name="password" value="${spring.datasource.password}"></property>
+        
+        
+        
+        <!-- <property name="monPoolSize" value="5" ></property>
+        <property name="maxPoolSize" value="10" ></property>
+        <property name="maxIdleTime" value="30000"></property> -->
+    </bean>
+
+    <!-- Bean que habilita las propiedades de conexión y genera el Entity Manager de JPA -->
+    <!-- Aquí se integra Spring con JPA -->
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="packageToScan" value="com.jr.sistemas.entities"></property>
+        <property name="jpaProperties">
+          <props>
+            <prop key="hibernate.dialect">org.hibernate.dialect.OracleDialect</prop>
+            <prop key="hibernate.show_sql">true</prop>
+            <prop key="hibernate.jdbc.time_zone">America/Lima</prop>
+          </props>
+        </property>
+        <!-- Proveedor de persistencia que va interactuar con las Entities de la BD -->
+        <property name="persistenceProvider">
+          <bean classs="org.hibernate.jpa.HibernatePersistenceProvider"></bean>
+        </property>
+    </bean>
+
+   <!-- Bean que se encarga de gestionar las transacciones para el CRUD de los entities -->
+  <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+  </bean>
+
+    <!-- Etiqueta que permite utilizar la anotación @Transactional de Spring para ejecutar transacciones de JPA -->
+   <tx:annotation-driven transaction-manager="transactionManager" />
+   <!-- Etique que permite registrar las clases que se encargan de ejecutar las transacciones a la base de datos. (DAO)-->
+   <jpa:repositories base-package="com.jr.sistemas.data.repositories" entity-manager-factory-ref="entityManagerFactory" ></jpa:repositories>
+
+</beans>

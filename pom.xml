@@ -11,4 +11,22 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/x
   	<module>app-prime-services</module>
   	<module>app-prime-web</module>
   </modules>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+
+    <junit-version>4.13.1</junit-version>
+    <hibernate-version>5.4.22.Final</hibernate-version>
+    <oracle.version>23.5.0.24.07</oracle.version>
+    <jpa.version>2.4.0</jpa.version>
+    <commons.version>2.8.0</commons.version>
+    <hibernate.javax.version>1.0.2.Final</hibernate.javax.version>
+    <spring.version>5.3.39</spring.version>
+    <jsf.version>2.2.20</jsf.version>
+    <primefaces.version>8.0</primefaces.version>
+    <javax.annotation.version>1.3.2</javax.annotation.version>
+  </properties>
+
 </project>

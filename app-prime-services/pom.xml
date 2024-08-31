@@ -7,18 +7,11 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <groupId>org.com.jrsistemas</groupId>
   <artifactId>app-prime-services</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
 
   <name>app-prime-services</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.release>17</maven.compiler.release>
-  </properties>
 
   <dependencyManagement>
     <dependencies>
@@ -33,17 +26,21 @@
   </dependencyManagement>
 
   <dependencies>
+    <!-- :::: INTEGRANDO LA DEPENDENCIA DEL PROYECTO APP-PRIME-DATA ::::::-->
     <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
+        <artifactId>app-prime-data</artifactId>
+        <groupId>org.com.jrsistemas</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit-version}</version>
       <scope>test</scope>
     </dependency>
-    <!-- Optionally: parameterized tests support -->
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-params</artifactId>
-      <scope>test</scope>
-    </dependency>
+
   </dependencies>
 
   <build>
